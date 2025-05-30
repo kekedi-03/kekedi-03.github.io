@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权鑫运输服务有限公司 - 招聘信息</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 100px 20px 50px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 顶部装饰元素 */
+        .top-decor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        /* 公司标题栏 */
+        .top {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            height: 100px;
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            line-height: 100px;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .top::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+        }
+        
+        .company-name {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+        }
+        
+        /* 主容器 */
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* 页面标题 */
+        .page-title {
+            text-align: center;
+            margin: 20px 0 40px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        
+        .page-title h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .page-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            opacity: 0.9;
+        }
+        
+        /* 招聘卡片容器 */
+        .job-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        
+        /* 招聘卡片 */
+        .job-card {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+        
+        /* 卡片头部 */
+        .job-header {
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            padding: 30px;
+            color: white;
+            position: relative;
+        }
+        
+        .job-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=500&q=80') center/cover;
+            opacity: 0.15;
+        }
+        
+        /* 职位信息 */
+        .job-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .job-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .job-salary {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffdd59;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 职位要求 */
+        .job-requirements {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-top: 15px;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* 卡片内容 */
+        .job-content {
+            padding: 30px;
+        }
+        
+        /* 要求列表 */
+        .requirement-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+        
+        .requirement-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+            color: #444;
+        }
+        
+        .requirement-list li i {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* 底部信息 */
+        .job-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-label {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 5px;
+        }
+        
+        .contact-detail {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e74c3c;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-detail i {
+            margin-right: 10px;
+            color: #4776E6;
+        }
+        
+        /* 底部装饰 */
+        .bottom-decor {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 底部版权 */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-top: 20px;
+            z-index: 2;
+        }
+        
+        /* 动画效果 */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .top {
+                font-size: 1.5rem;
+            }
+            
+            .page-title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .job-header {
+                padding: 20px;
+            }
+            
+            .job-title, .job-salary {
+                font-size: 1.5rem;
+            }
+            
+            .job-content {
+                padding: 20px;
+            }
+            
+            .contact-detail {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .top {
+                font-size: 1.3rem;
+                height: 80px;
+                line-height: 80px;
+            }
+            
+            .page-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .job-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .job-salary {
+                margin-top: 10px;
+            }
+            
+            .job-footer {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-decor"></div>
+    
+    <div class="top">
+        <div class="company-name">权鑫运输服务有限公司</div>
+    </div>
+    
+    <div class="main-container">
+        <div class="page-title">
+            <h1>招聘信息</h1>
+            <p>加入我们，共创美好未来！我们提供有竞争力的薪资和广阔的发展空间</p>
+        </div>
+        
+        <div class="job-cards">
+            <div class="job-card">
+                <div class="job-header">
+                    <div class="job-info">
+                        <div class="job-title">帮厨</div>
+                        <div class="job-salary">6000-10000元</div>
+                    </div>
+                    <div class="job-requirements">
+                        1-3年工作经验 | 适合女性 | 学历不限
+                    </div>
+                </div>
+                
+                <div class="job-content">
+                    <h2 style="color: #4776E6; margin-bottom: 20px;">职位详情</h2>
+                    
+                    <ul class="requirement-list">
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>负责公司员工食堂的日常烹饪工作</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>确保食品安全卫生，保持厨房环境整洁</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>协助制定每周菜单，合理控制成本</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>完成主管安排的其他相关工作</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="job-footer">
+                        <div class="contact-info">
+                            <div class="contact-label">招聘负责人</div>
+                            <div class="contact-detail">
+                                <i class="fas fa-user-tie"></i> 胡老板
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <div class="contact-label">联系电话</div>
+                            <div class="contact-detail">
+                                <i class="fas fa-phone-alt"></i> 13576376016
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第二张招聘卡片示例 -->
+            <div class="job-card">
+                <div class="job-header" style="background: linear-gradient(to right, #FF416C, #FF4B2B);">
+                    <div class="job-info">
+                        <div class="job-title">货运司机</div>
+                        <div class="job-salary">8000-15000元</div>
+                    </div>
+                    <div class="job-requirements">
+                        2-5年驾龄 | B2驾照以上 | 熟悉本地路况
+                    </div>
+                </div>
+                
+                <div class="job-content">
+                    <h2 style="color: #FF416C; margin-bottom: 20px;">职位详情</h2>
+                    
+                    <ul class="requirement-list">
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>负责公司货物的安全运输和准时送达</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>做好车辆日常检查和维护保养</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>遵守交通规则，确保行车安全</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>协助完成货物的装卸工作</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="job-footer">
+                        <div class="contact-info">
+                            <div class="contact-label">招聘负责人</div>
+                            <div class="contact-detail">
+                                <i class="fas fa-user-tie"></i> 张经理
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <div class="contact-label">联系电话</div>
+                            <div class="contact-detail">
+                                <i class="fas fa-phone-alt"></i> 13800138000
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-decor"></div>
+    
+    <div class="footer">
+        <p>© 2023 权鑫运输服务有限公司 版权所有</p>
+        <p style="margin-top: 10px;">地址：上海市浦东新区张江高科技园区 | 电话：021-12345678</p>
+    </div>
+    
+    <script>
+        // 添加简单的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const jobCards = document.querySelectorAll('.job-card');
+            
+            jobCards.forEach((card, index) => {
+                // 设置延迟动画
+                card.style.animation = `fadeIn 0.5s ease forwards`;
+                card.style.animationDelay = `${index * 0.2}s`;
+                card.style.opacity = '0';
+            });
+            
+            // 背景动画
+            const colors = [
+                'linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c)',
+                'linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b)',
+                'linear-gradient(135deg, #0f2027, #203a43, #2c5364)'
+            ];
+            
+            let currentColor = 0;
+            
+            setInterval(() => {
+                document.body.style.background = colors[currentColor];
+                currentColor = (currentColor + 1) % colors.length;
+            }, 10000);
+        });
+    </script>
+</body>
+</html>
